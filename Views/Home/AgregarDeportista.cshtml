@@ -1,0 +1,26 @@
+@using TP_JJOOREENTREGA_WICNUDEL_TAGLIORETTI_MARASCH.Models;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form action = '@Url.Action("GuardarDeportista")' >
+    <label>Nombre: <input type="text" name="Nombre"></label>
+    <label>Apellido: <input type="text" name="Apellido"></label>
+    <label>Fecha de nacimiento: <input type="text" name="FechaNacimiento"></label>
+    <label>Foto: <input type="text" name="Foto" placeholder="Inserte una URL de una imagen"></label>
+
+    <label>Seleccione un deporte:</label>
+        <select name="IdDeporte" required>
+            @foreach(Deporte deporte in ViewBag.Deportes){
+                <option value="@deporte.IdDeporte">@deporte.Nombre</option>
+            }  
+        </select>
+    
+    <label>Seleccione un deporte:</label>
+        <select name="IdPais" required>
+            @foreach(Pais pais in ViewBag.Paises){
+                <option value="@pais.IdPais">@pais.Nombre</option>
+            }  
+        </select>
+    <input type="submit" text="submit"> 
+</form>

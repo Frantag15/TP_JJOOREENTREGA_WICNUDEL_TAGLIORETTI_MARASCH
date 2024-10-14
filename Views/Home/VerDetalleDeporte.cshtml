@@ -1,0 +1,34 @@
+@using TP_JJOOREENTREGA_WICNUDEL_TAGLIORETTI_MARASCH.Models;
+
+<div class="container mt-4">
+    <h2 class="mb-4">Detalle del Deporte</h2>
+
+    <div class="card mb-4">
+        <img class="card-img-top" src="@ViewBag.Deporte.Foto" alt="Foto del Deporte" style="height: 300px; object-fit: cover;">
+        <div class="card-body">
+            <h3 class="card-title">@ViewBag.Deporte.Nombre</h3>
+        </div>
+    </div>
+
+    <h3 class="mb-4">Deportistas en @ViewBag.Deporte.Nombre</h3>
+
+        <div class="row">
+            @foreach (Deportistas deportista in ViewBag.Deportistas)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="@deportista.Foto" alt="Foto del Deportista" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">@deportista.Nombre @deportista.Apellido</h5>
+                            <p class="card-text">Fecha de Nacimiento: @deportista.FechaNacimiento.ToShortDateString()</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="@Url.Action("VerDetalleDeportista", new { idDeportista = deportista.IdDeportista })" class="btn btn-info btn-block">
+                                Ver Detalle
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+</div>

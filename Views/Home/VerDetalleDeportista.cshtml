@@ -1,0 +1,59 @@
+@using TP_JJOOREENTREGA_WICNUDEL_TAGLIORETTI_MARASCH.Models;
+
+@{
+    ViewData["Title"] = "Detalle del Deportista";
+    Deporte deporte = BD.VerInfoDeporte(ViewBag.Deportista.IdDeporte);
+    Pais pais = BD.VerInfoPais(ViewBag.Deportista.IdPais);
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Detalle del Deportista</h2>
+
+    <div class="card mb-4">
+        <img class="card-img-top" src="@ViewBag.Deportista.Foto" alt="Foto del Deportista" style="height: 300px; object-fit: cover;">
+        <div class="card-body">
+            <h3 class="card-title">@ViewBag.Deportista.Nombre @ViewBag.Deportista.Apellido</h3>
+            <p class="card-text"><strong>Fecha de Nacimiento:</strong> @ViewBag.Deportista.FechaNacimiento.ToShortDateString()</p>
+            <p class="card-text"><strong>Deporte:</strong> <a href='@Url.Action("VerDetalleDeporte", new { idDeporte = deporte.IdDeporte })'>@deporte.Nombre</a></p>
+            <p class="card-text"><strong>País:</strong> <a href='@Url.Action("VerDetallePais", new { idPais = pais.IdPais })'>@pais.Nombre</a></p>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <a href='@Url.Action("Deportes", "Home")' class="btn btn-secondary">Volver a Deportes</a>
+        <a href='@Url.Action("Paises", "Home")' class="btn btn-secondary">Volver a Países</a>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <h2 class="mb-4">Detalle del País</h2>
+
+    <div class="card mb-4">
+        <img class="card-img-top" src="@ViewBag.Pais.Bandera" alt="Bandera del País" style="height: 300px; object-fit: cover;">
+        <div class="card-body">
+            <h3 class="card-title">@ViewBag.Pais.Nombre</h3>
+            <p class="card-text"><strong>Fecha de Fundación:</strong> @ViewBag.Pais.FechaFundacion.ToShortDateString()</p>
+        </div>
+    </div>
+
+    <h3 class="mb-4">Deportistas de @ViewBag.Pais.Nombre</h3>
+    <div class="row">
+        @foreach (Deportistas deportista in ViewBag.Deportistas)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="@deportista.Foto" alt="Foto del Deportista" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@deportista.Nombre @deportista.Apellido</h5>
+                        <p class="card-text">Fecha de Nacimiento: @deportista.FechaNacimiento.ToShortDateString()</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href='@Url.Action("VerDetalleDeportista", new { idDeportista = deportista.IdDeportista })' class="btn btn-info btn-block">
+                            Ver Detalle
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

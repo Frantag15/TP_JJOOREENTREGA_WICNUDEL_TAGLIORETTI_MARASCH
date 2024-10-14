@@ -1,0 +1,25 @@
+@using TP_JJOOREENTREGA_WICNUDEL_TAGLIORETTI_MARASCH.Models;
+
+<div class="container mt-4">
+    <h2 class="mb-4">Lista de Países</h2>
+    
+        <div class="row">
+            @foreach (Pais pais in ViewBag.Paises)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="@pais.Bandera" alt="Bandera del País" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">@pais.Nombre</h5>
+                            <p class="card-text">Fundado el: @pais.FechaFundacion.ToShortDateString()</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="@Url.Action("VerDetallePais", new { idPais = pais.IdPais })" class="btn btn-info btn-block">
+                                Ver Detalle
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+</div>
